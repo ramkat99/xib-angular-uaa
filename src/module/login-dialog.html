@@ -1,0 +1,50 @@
+<md-dialog style="min-width: 400px;">
+  <form ng-cloak name="loginForm" autocomplete="off">
+    <md-toolbar style="background-color: white;" md-whiteframe="2">
+      <div class="md-toolbar-tools">
+        <img src="images/vodacom-logo.png" style="
+             margin-left: -16px;
+             margin-top: -10px;
+             height: 60px;"
+        />
+        <h2 style="color: dimgray;">{{vm.title}}</h2>
+      </div>
+      <md-progress-linear md-mode="indeterminate" ng-disabled="!vm.loggingIn"></md-progress-linear>
+    </md-toolbar>
+
+    <md-dialog-content md-whiteframe="2">
+      <md-toolbar class="md-warn loginBanner" ng-show="vm.loginError" style="height: 40px !important; min-height: 25px;">
+        <div class="md-toolbar-tools">
+          <div style="text-align: center; font-size: 15px; width:100%;"> Authentication Failed.  Please try again</div>
+        </div>
+      </md-toolbar>
+
+      <div class="md-dialog-content">
+        <md-input-container class="md-icon-float md-block">
+          <label>Username</label>
+          <md-icon md-svg-src="login" class="name"></md-icon>
+          <input ng-model="vm.username" name="username" maxlength="128" required type="text">
+          <div ng-messages="loginForm.username.$error" role="alert">
+            <div ng-message="required">Please provide a valid Username.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+          <label>Password</label>
+          <md-icon md-svg-src="lock" class="name"></md-icon>
+          <input ng-model="vm.password" name="password" maxlength="128" required type="password">
+          <div ng-messages="loginForm.password.$error" role="alert">
+            <div ng-message="required">Please provide a valid Password.</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button type="submit" ng-click="vm.submit()" ng-disabled="loginForm.$invalid || loginForm.$pristine" ng-disabled="vm.loggingIn">
+        <md-progress-circular md-mode="indeterminate" md-diameter="20px" style="display: inline; margin-right: 30px;" ng-show="vm.loggingIn"></md-progress-circular>
+        Submit</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
